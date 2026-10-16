@@ -1,0 +1,21 @@
+// SpacemiT device-policy SDK: the AIDL contract + a client Manager that binds
+// to the policy service. Pure public-API Java (no @hide), so it also builds as
+// a standalone AAR for JitPack. Promote to java_sdk_library in the hardening
+// phase to freeze a tracked API (api/*.txt).
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+java_library {
+    name: "spacemit-policy-sdk",
+    srcs: [
+        "src/**/*.java",
+        "aidl/**/*.aidl",
+    ],
+    aidl: {
+        local_include_dirs: ["aidl"],
+    },
+    sdk_version: "current",
+    min_sdk_version: "34",
+}

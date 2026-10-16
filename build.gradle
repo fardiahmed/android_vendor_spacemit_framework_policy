@@ -1,0 +1,46 @@
+// Gradle/JitPack build of the SpacemiT Policy SDK as a reusable AAR. Reuses the
+// same src/ and aidl/ trees the Soong build uses. The Soong build ignores this
+// file. JitPack uses the git tag as the version.
+
+plugins {
+    id 'com.android.library' version '8.5.2'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.spacemit.policy'
+    compileSdk 35
+    defaultConfig {
+        minSdk 34
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'gradle/AndroidManifest.xml'
+            java.srcDirs = ['src']
+            aidl.srcDirs = ['aidl']
+        }
+    }
+    buildFeatures {
+        aidl true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    publishing {
+        singleVariant('release')
+    }
+}
+
+group = 'com.github.fardiahmed'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                artifactId = 'spacemit-policy-sdk'
+            }
+        }
+    }
+}

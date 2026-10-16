@@ -1,0 +1,4 @@
+# Gradle/JitPack build output (the Soong build is unaffected)
+.gradle/
+build/
+local.properties
